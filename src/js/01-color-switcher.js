@@ -3,6 +3,7 @@ const el = {
     buttonStop: document.querySelector('[data-stop]'),
     body: document.querySelector('body')
 }
+let id = null;
 
 el.buttonStart.addEventListener("click", onStartClick);
 el.buttonStop.addEventListener("click", onStopClick);
@@ -10,19 +11,12 @@ el.buttonStop.addEventListener("click", onStopClick);
 function onStartClick() {
     id = setInterval(() => { el.body.style.backgroundColor = getRandomHexColor() }, 1000);
     el.buttonStart.disabled = true;
-    el.buttonStop.disabled = false;
 };
 
 function onStopClick() {
     clearInterval(id);
     el.buttonStart.disabled = false;
-    el.buttonStop.disabled = true;
-}
 
-onStartPage();
-
-function onStartPage() {
-    el.buttonStop.disabled = true;
 }
 
 
