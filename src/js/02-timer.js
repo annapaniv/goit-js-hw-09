@@ -39,7 +39,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0].getTime() - currentDate) {
+    if (selectedDates[0].getTime() - currentDate.getTime() <0 ) {
       Notify.failure('Please choose a date in the future');
     } else {
       el.buttonStart.disabled = false;
@@ -50,7 +50,7 @@ const options = {
       function onStartClick() {
         el.inputEl.disabled = true;
         const timerId = setInterval(() => {
-        const ms = selectedDates[0].getTime() - currentDate;
+        const ms = selectedDates[0].getTime() - currentDate.getTime();
         el.dayEl.textContent = addLeadingZero(convertMs(ms).days);
         el.hourEl.textContent = addLeadingZero(convertMs(ms).hours);
         el.minuteEl.textContent = addLeadingZero(convertMs(ms).minutes);
@@ -61,6 +61,7 @@ const options = {
         }, 1000)
       }
   }}
+
 
 
 flatpickr(el.inputEl, options);
