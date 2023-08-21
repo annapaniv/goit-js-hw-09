@@ -11,7 +11,7 @@ const el = {
   secondsEl: document.querySelector('[data-seconds]')
 }
 const currentDate = new Date();
- el.buttonStart.disabled = true;
+el.buttonStart.disabled = true;
 let timerId;
 
 function convertMs(ms) {
@@ -39,28 +39,31 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0].getTime() < currentDate ) {
+    if (selectedDates[0].getTime() < currentDate.getTime()) {
       Notify.failure('Please choose a date in the future');
-    } else { 
+    } else {
       el.buttonStart.disabled = false;
     }
 
-      el.buttonStart.addEventListener("click", onStartClick);
+    el.buttonStart.addEventListener("click", onStartClick);
 
-      function onStartClick() {
-        el.inputEl.disabled = true;
-        const timerId = setInterval(() => {
-        const ms = selectedDates[0].getTime() - currentDate;
+    function onStartClick() {
+      el.inputEl.disabled = true;
+
+      const timerId = setInterval(() => {
+        const currentTime = new Date();
+        const ms = selectedDates[0].getTime() - currentTime.getTime();
         el.dayEl.textContent = addLeadingZero(convertMs(ms).days);
         el.hourEl.textContent = addLeadingZero(convertMs(ms).hours);
         el.minuteEl.textContent = addLeadingZero(convertMs(ms).minutes);
         el.secondsEl.textContent = addLeadingZero(convertMs(ms).seconds);
-        if (ms < 1000){
+        if (ms < 0) {
           clearInterval(timerId)
         }
-        }, 1000)
-      }
-  }}
+      }, 1000)
+    }
+  }
+}
 
 
 
