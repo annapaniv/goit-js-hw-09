@@ -57,7 +57,7 @@ const options = {
         el.hourEl.textContent = addLeadingZero(convertMs(ms).hours);
         el.minuteEl.textContent = addLeadingZero(convertMs(ms).minutes);
         el.secondsEl.textContent = addLeadingZero(convertMs(ms).seconds);
-        if (ms < 0) {
+        if (ms < 1000) {
           clearInterval(timerId)
         }
       }, 1000)
